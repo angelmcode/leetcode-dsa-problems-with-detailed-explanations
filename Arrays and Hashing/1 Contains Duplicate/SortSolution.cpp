@@ -5,6 +5,7 @@
 
 #include <iostream> // needed to use input output operations
 #include <vector> // needed to use vector container
+#include <algorithm>
 using namespace std; //avoid write every time std
 #include <chrono> // for test the time complexity
 using namespace std::chrono; // avoid write every time std::chrono
@@ -13,17 +14,13 @@ class Solution {
 public:
     // static allows us to call the method without creating an instance of the Solution class
     static bool containsDuplicate(vector<int>& nums) {
+      sort(nums.begin(),nums.end());
 
       for (int i = 0; i < nums.size()-1; i++)
       {
-         // compares every element with forwards elements to find duplicates
-         for (int j = i + 1; j < nums.size(); j++)
+         if (nums[i]==nums[i+1])
          {
-            if (nums[i]==nums[j])
-            {
-               return true;
-            }
-            
+            return true;
          }
          
       }
