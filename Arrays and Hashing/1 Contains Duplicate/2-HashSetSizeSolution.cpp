@@ -1,30 +1,33 @@
-//This solution is efficient: Time: O(n^2) Space: O(1).
+//This solution is efficient: Time: O(n) Space: O(n).
 
 // Input of 100,000 elements:
-// Time execution : 45429 milliseconds on average. 45 seconds.
+// Time execution : 51 milliseconds on average.
+// Memory use acording to leetcode: 93 MB
 
 #include <iostream> // needed to use input output operations
-#include <vector> // needed to use vector container
-#include <algorithm>
+#include <vector> // needed to use vector container 
 using namespace std; //avoid write every time std
 #include <chrono> // for test the time complexity
 using namespace std::chrono; // avoid write every time std::chrono
+#include <unordered_set> //For using unordered_set
 
 class Solution {
 public:
     // static allows us to call the method without creating an instance of the Solution class
     static bool containsDuplicate(vector<int>& nums) {
-      sort(nums.begin(),nums.end());
 
-      for (int i = 0; i < nums.size()-1; i++)
-      {
-         if (nums[i]==nums[i+1])
-         {
+        // create a copy of nums
+        unordered_set<int> numsCopy(nums.begin(), nums.end());
+
+        // compare the sizes of nums(array) and numsCopy(hash set)
+        if (numsCopy.size()!= nums.size())
+        {
+            // if both are not equals means that are duplicates since set dont accept duplicates keys 
             return true;
-         }
-         
-      }
-      return false;
+        }
+        
+
+        return false; // No duplicates found
     }
 };
 
