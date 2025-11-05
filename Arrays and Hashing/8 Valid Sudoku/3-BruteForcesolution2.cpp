@@ -10,9 +10,9 @@ public:
 
     static bool isValidSudoku(vector<vector<char>>& board) {
 
-      for (int row = 0; row < 9; row++)
+      for (int row = 0; row < 9; row++) //Time: 0(n^2)
       {
-         unordered_set<char> seen;
+         unordered_set<char> seen; //Space: 0(n)
          for (int j = 0; j < 9; j++)
          {
             if (board[row][j] != '.' && !seen.insert(board[row][j]).second)
@@ -22,9 +22,9 @@ public:
          }
       }
 
-      for (int col = 0; col < 9; col++)
+      for (int col = 0; col < 9; col++) //Time: 0(n^2)
       {
-         unordered_set<char> seen;
+         unordered_set<char> seen; //Space: 0(n)
          for (int j = 0; j < 9; j++)
          {
             if (board[j][col] != '.' && !seen.insert(board[j][col]).second)
@@ -34,9 +34,9 @@ public:
          }
       }
 
-      for (int box = 0; box < 9; box++)
+      for (int box = 0; box < 9; box++) //Time: 0(n^2)
       {
-         unordered_set<char> seen;
+         unordered_set<char> seen; //Space: 0(n)
 
          for (int j = 0; j < 3; j++)
          {  

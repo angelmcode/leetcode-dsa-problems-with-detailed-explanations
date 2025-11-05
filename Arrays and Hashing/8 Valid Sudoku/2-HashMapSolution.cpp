@@ -1,35 +1,35 @@
-//Time Complexity: 0(n^2)  Space Complexity: O(n)
+//Time Complexity: 0(n^2)  Space Complexity: O(n^2)
 #include <iostream> // needed to input output operations
 #include <vector> // needed to use vector
+#include <unordered_set> // hash set
+#include <unordered_map> // hash map
+#include <map> // map: implemented as a balanced binary search tree
 using namespace std; // needed to avoid write std:: every time
 
 class Solution {
 public:
 
     static bool isValidSudoku(vector<vector<char>>& board) {
-      int row[9] = {0};
-      int col[9] = {0};
-      int square[9] = {0};
+      //Time: 0(n^2)
+      unordered_map<int, unordered_set<char>> row, col;
+      map< pair<int, int>, unordered_set<char>> square;
 
-      for (int r = 0; r < 9; r++)
+      for (int r = 0; r < 9; r++) //Time: 0(n^2)
       {
          for (int c = 0; c < 9; c++)
          {
-            if (board[r][c] == '.') continue; 
-            
-            int s = ((r/3)*3 + (c/3));
-            int value = board[r][c] - '1';
+            if (board[r][c] == '.') continue;
 
-            if ((row[r] & (1 << value)) || (col[c] & (1 << value)) || (square[s] & (1 << value)))
-            {
+            pair<int, int> s = {r/3,c/3};
+
+            if (row[r].count(board[r][c]) || col[c].count(board[r][c]) || square[s].count(board[r][c])){
                return false;
             }
 
-            row[r] |= (1<<value);
-            col[c] |= (1<<value);
-            square[s] |= (1<<value);
-         }
-         
+            row[r].insert(board[r][c]);
+            col[c].insert(board[r][c]);
+            square[s].insert(board[r][c]);
+         }  
       }
       return true;
    }
